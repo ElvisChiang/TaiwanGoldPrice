@@ -1,0 +1,21 @@
+{
+  "total": 16,
+  "price": [
+    {"date":20160418, "hour":8, "minute":40, "buy":1276, "sell":1292},
+    {"date":20160418, "hour":9, "minute":10, "buy":1278, "sell":1294},
+    {"date":20160418, "hour":9, "minute":25, "buy":1279, "sell":1295},
+    {"date":20160418, "hour":9, "minute":40, "buy":1278, "sell":1294},
+    {"date":20160418, "hour":10, "minute":20, "buy":1279, "sell":1295},
+    {"date":20160418, "hour":10, "minute":50, "buy":1278, "sell":1294},
+    {"date":20160418, "hour":11, "minute":50, "buy":1277, "sell":1293},
+    {"date":20160418, "hour":12, "minute":10, "buy":1278, "sell":1294},
+    {"date":20160418, "hour":12, "minute":45, "buy":1279, "sell":1295},
+    {"date":20160418, "hour":13, "minute":15, "buy":1280, "sell":1296},
+    {"date":20160418, "hour":13, "minute":55, "buy":1279, "sell":1295},
+    {"date":20160418, "hour":14, "minute":40, "buy":1280, "sell":1296},
+    {"date":20160418, "hour":14, "minute":50, "buy":1278, "sell":1294},
+    {"date":20160418, "hour":15, "minute":0, "buy":1276, "sell":1292},
+    {"date":20160418, "hour":15, "minute":10, "buy":1278, "sell":1294},
+    {"date":20160418, "hour":15, "minute":25, "buy":1280, "sell":1296}
+  ]
+}

@@ -621,6 +621,7 @@
 				INFOPLIST_FILE = "GoldPrice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.elvisfb.GoldPrice;
 				PRODUCT_NAME = GoldPrice;
 			};
 			name = Debug;
@@ -637,6 +638,7 @@
 				INFOPLIST_FILE = "GoldPrice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.elvisfb.GoldPrice;
 				PRODUCT_NAME = GoldPrice;
 			};
 			name = Release;
