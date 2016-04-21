@@ -1,13 +1,19 @@
 package main
 
-import "fmt"
+import "net/http"
 
 func main() {
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":8080", nil)
+}
 
-	fmt.Printf("{\n")
-	outputYearJSON()
-	fmt.Printf("}\n")
-	fmt.Printf("{\n")
-	outputDateJSON()
-	fmt.Printf("}\n")
+func handler(w http.ResponseWriter, r *http.Request) {
+	request := r.URL.Path[1:]
+	if request == "today" {
+		outputTodayJSON(w)
+	} else if request == "year" {
+		outputYearJSON(w)
+	} else {
+		http.NotFound(w, r)
+	}
 }

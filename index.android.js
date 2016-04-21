@@ -1,6 +1,6 @@
 'use strict';
 
 const {AppRegistry} = require('react-native');
-const goldprice = require('./js/goldprice');
+const entry = require('./js/entry');
 
-AppRegistry.registerComponent('GoldPrice', goldprice);
+AppRegistry.registerComponent('GoldPrice', () => entry);
