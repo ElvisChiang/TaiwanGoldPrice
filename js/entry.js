@@ -1,5 +1,7 @@
+/* @flow */
+import React from 'react';
 
-import React, {
+import {
   AppRegistry,
   Component,
   Image,
@@ -13,9 +15,15 @@ import React, {
 var Today = require('./today');
 var Year = require('./year');
 
+type State = {
+  selectedTab: string,
+};
+
 class Entry extends Component {
-  constructor(props) {
-    super(props)
+  state: State;
+
+  constructor() {
+    super()
     this.state = {
         selectedTab: 'today'
     };

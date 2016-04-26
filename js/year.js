@@ -1,3 +1,4 @@
+/* @flow */
 import React, {
   AppRegistry,
   Component,
@@ -10,9 +11,24 @@ import React, {
 
 const {SERVER_DATA_YEAR} = require('./def');
 
+type State = {
+  dataSource: ListView.DataSource,
+  loaded: boolean,
+  date: string,
+};
+
+type Price = {
+  date: string,
+  hour: Number,
+  minute: Number,
+  buy: Number,
+  sell: Number,
+}
+
 class Year extends Component {
-  constructor(props) {
-    super(props)
+  state: State;
+  constructor() {
+    super()
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
@@ -57,7 +73,7 @@ class Year extends Component {
       </View>
     )
   }
-  renderPrice(price) {
+  renderPrice(price: Price) {
     return (
       <View style={styles.container}>
         <Text style={styles.date}>{price.date}</Text>

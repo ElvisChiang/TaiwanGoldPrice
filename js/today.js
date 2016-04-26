@@ -1,3 +1,4 @@
+/* @flow */
 import React, {
   AppRegistry,
   Component,
@@ -10,9 +11,23 @@ import React, {
 
 const {SERVER_DATA_TODAY} = require('./def');
 
+type State = {
+  dataSource: ListView.DataSource,
+  loaded: boolean,
+  date: string,
+};
+
+type Price = {
+  hour: Number,
+  minute: Number,
+  buy: Number,
+  sell: Number,
+}
+
 class Today extends Component {
-  constructor(props) {
-    super(props)
+  state: State;
+  constructor() {
+    super()
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
@@ -52,6 +67,7 @@ class Today extends Component {
         />
     );
   }
+
   renderLoadingView() {
     return (
       <View style={styles.container}>
@@ -61,6 +77,7 @@ class Today extends Component {
       </View>
     )
   }
+
   renderHeader() {
     return (
       <View style={styles.headerContainer}>
@@ -68,7 +85,8 @@ class Today extends Component {
       </View>
     )
   }
-  renderPrice(price) {
+
+  renderPrice(price: Price) {
     return (
       <View style={styles.container}>
         <Text style={styles.time}>{price.hour}:{price.minute}</Text>
