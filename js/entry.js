@@ -2,11 +2,9 @@
 import React from 'react';
 
 import {
-  Component,
-  StyleSheet,
   TabBarIOS,
 } from 'react-native';
-
+const strings = require('./l10n/strings');
 var Today = require('./today');
 var Year = require('./year');
 
@@ -28,7 +26,7 @@ class Entry extends React.Component {
       <TabBarIOS selectedTab={this.state.selectedTab}>
         <TabBarIOS.Item
           selected={this.state.selectedTab === 'today'}
-          title="Today"
+          title={strings.today}
           onPress={() => {
             this.setState({
               selectedTab: 'today'
@@ -38,7 +36,7 @@ class Entry extends React.Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item
           selected={this.state.selectedTab === 'year'}
-          title="Whole Year"
+          title={strings.pastYear}
           onPress={() => {
             this.setState({
               selectedTab: 'year'

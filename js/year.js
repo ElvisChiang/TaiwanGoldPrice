@@ -69,7 +69,7 @@ class Year extends React.Component {
           Loading gold price...
         </Text>
       </View>
-    )
+    );
   }
   renderPrice(price: Price) {
     return (

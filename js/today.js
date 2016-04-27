@@ -7,6 +7,7 @@ import {
   View
 } from 'react-native';
 
+const strings = require('./l10n/strings');
 const {SERVER_DATA_TODAY} = require('./def');
 
 type State = {
@@ -79,7 +80,7 @@ class Today extends React.Component {
   renderHeader() {
     return (
       <View style={styles.headerContainer}>
-        <Text style={styles.date}>Today is {this.state.date}</Text>
+        <Text style={styles.date}>{strings.todayis}{this.state.date}</Text>
       </View>
     );
   }
