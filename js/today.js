@@ -1,8 +1,6 @@
 /* @flow */
-import React, {
-  AppRegistry,
-  Component,
-  Image,
+import React from 'react';
+import {
   ListView,
   StyleSheet,
   Text,
@@ -24,10 +22,10 @@ type Price = {
   sell: Number,
 }
 
-class Today extends Component {
+class Today extends React.Component {
   state: State;
   constructor() {
-    super()
+    super();
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
@@ -47,7 +45,7 @@ class Today extends Component {
           loaded: true,
           date: responseData.date
         });
-        console.log("today is " + this.state.date);
+        console.log('today is ' + this.state.date);
       })
       .done();
     }
@@ -75,7 +73,7 @@ class Today extends Component {
           Loading gold price...
         </Text>
       </View>
-    )
+    );
   }
 
   renderHeader() {
@@ -83,7 +81,7 @@ class Today extends Component {
       <View style={styles.headerContainer}>
         <Text style={styles.date}>Today is {this.state.date}</Text>
       </View>
-    )
+    );
   }
 
   renderPrice(price: Price) {

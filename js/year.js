@@ -1,8 +1,6 @@
 /* @flow */
-import React, {
-  AppRegistry,
-  Component,
-  Image,
+import React from 'react';
+import {
   ListView,
   StyleSheet,
   Text,
@@ -25,10 +23,10 @@ type Price = {
   sell: Number,
 }
 
-class Year extends Component {
+class Year extends React.Component {
   state: State;
   constructor() {
-    super()
+    super();
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,

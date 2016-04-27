@@ -2,14 +2,9 @@
 import React from 'react';
 
 import {
-  AppRegistry,
   Component,
-  Image,
-  ListView,
   StyleSheet,
   TabBarIOS,
-  Text,
-  View
 } from 'react-native';
 
 var Today = require('./today');
@@ -19,21 +14,21 @@ type State = {
   selectedTab: string,
 };
 
-class Entry extends Component {
+class Entry extends React.Component {
   state: State;
 
   constructor() {
-    super()
+    super();
     this.state = {
         selectedTab: 'today'
     };
   }
   render() {
-    return(
+    return (
       <TabBarIOS selectedTab={this.state.selectedTab}>
         <TabBarIOS.Item
           selected={this.state.selectedTab === 'today'}
-          title='Today'
+          title="Today"
           onPress={() => {
             this.setState({
               selectedTab: 'today'
@@ -43,7 +38,7 @@ class Entry extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item
           selected={this.state.selectedTab === 'year'}
-          title='Whole Year'
+          title="Whole Year"
           onPress={() => {
             this.setState({
               selectedTab: 'year'
@@ -55,8 +50,5 @@ class Entry extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-});
 
 module.exports = Entry;
