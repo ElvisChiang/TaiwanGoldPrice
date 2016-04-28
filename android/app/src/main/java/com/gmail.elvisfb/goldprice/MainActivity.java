@@ -1,4 +1,4 @@
-package com.goldprice;
+package com.gmail.elvisfb.goldprice;
 
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
 

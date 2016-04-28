@@ -7,7 +7,12 @@ let strings = new LocalizedStrings({
     pastYear: 'Past Year',
     todayis: 'Today is ',
   },
-  zh: {
+  'zh': {
+    today: '今天',
+    pastYear: '過去一年',
+    todayis: '今天是 ',
+  },
+  'zh-TW': {
     today: '今天',
     pastYear: '過去一年',
     todayis: '今天是 ',
