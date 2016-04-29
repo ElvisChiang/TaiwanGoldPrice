@@ -1,12 +1,13 @@
 /* @flow */
+'use strict';
+
 import React from 'react';
 
 import {
   TabBarIOS,
 } from 'react-native';
 const strings = require('./l10n/strings');
-var Today = require('./today');
-var Year = require('./year');
+var Price = require('./price');
 
 type State = {
   selectedTab: string,
@@ -32,7 +33,7 @@ class Entry extends React.Component {
               selectedTab: 'today'
             });
           }}>
-          <Today />
+          <Price type="today" />
         </TabBarIOS.Item>
         <TabBarIOS.Item
           selected={this.state.selectedTab === 'year'}
@@ -42,7 +43,7 @@ class Entry extends React.Component {
               selectedTab: 'year'
             });
           }}>
-          <Year />
+          <Price type="year" />
         </TabBarIOS.Item>
       </TabBarIOS>
     );

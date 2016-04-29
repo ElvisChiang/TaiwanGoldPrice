@@ -1,33 +1,51 @@
 /* @flow */
+'use strict';
+
 import React from 'react';
 import {
   ListView,
+  RefreshControl,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 
 const strings = require('./l10n/strings');
-const {SERVER_DATA_TODAY} = require('./def');
+const {SERVER_DATA_TODAY, SERVER_DATA_YEAR} = require('./def');
 
 type State = {
   dataSource: ListView.DataSource,
   loaded: boolean,
   error: string,
   date: string,
+  refreshing: boolean,
+  type: string,
 };
 
-type Price = {
-  hour: Number,
-  minute: Number,
-  buy: Number,
-  sell: Number,
+type Prop = {
+  type: string,
 }
 
-class Today extends React.Component {
+type Price = {
+  date: string,
+  hour: number,
+  minute: number,
+  buy: number,
+  sell: number,
+}
+
+class PriceView extends React.Component {
   state: State;
-  constructor() {
-    super();
+
+  constructor(props: Prop) {
+    super(props);
+    console.log(props.type);
+    var source;
+    if (props.type === 'year') {
+      source = 'year';
+    } else { // default is today
+      source = 'today';
+    }
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
@@ -35,12 +53,15 @@ class Today extends React.Component {
       loaded: false,
       error: '',
       date: '',
+      refreshing: false,
+      type: source,
     };
     this.fetchData();
   }
 
   fetchData() {
-    fetch(SERVER_DATA_TODAY)
+    var url = this.state.type === 'today' ? SERVER_DATA_TODAY : SERVER_DATA_YEAR;
+    fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
@@ -48,6 +69,7 @@ class Today extends React.Component {
           loaded: true,
           date: responseData.date,
           error: '',
+          refreshing: false,
         });
         console.log('today is ' + this.state.date);
       })
@@ -58,6 +80,11 @@ class Today extends React.Component {
         });
       })
       .done();
+    }
+
+    _onRefresh() {
+      this.setState({refreshing: true});
+      this.fetchData();
     }
 
   render() {
@@ -76,6 +103,12 @@ class Today extends React.Component {
         renderRow={this.renderPrice.bind(this)}
         style={styles.listview}
         renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+            />
+        }
         />
     );
   }
@@ -99,6 +132,12 @@ class Today extends React.Component {
   }
 
   renderHeader() {
+    if (this.state.type === 'year') {
+      return (
+        <View />
+      );
+    }
+
     return (
       <View style={styles.headerContainer}>
         <Text style={styles.date}>{strings.todayis}{this.state.date}</Text>
@@ -107,13 +146,23 @@ class Today extends React.Component {
   }
 
   renderPrice(price: Price) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.time}>{price.hour}:{price.minute}</Text>
-        <Text style={styles.price}>{price.buy}</Text>
-        <Text style={styles.price}>{price.sell}</Text>
-      </View>
-    );
+    if (this.state.type === 'today') {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.time}>{price.hour}:{price.minute}</Text>
+          <Text style={styles.price}>{price.buy}</Text>
+          <Text style={styles.price}>{price.sell}</Text>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.date}>{price.date}</Text>
+          <Text style={styles.price}>{price.buy}</Text>
+          <Text style={styles.price}>{price.sell}</Text>
+        </View>
+      );
+    }
   }
 }
 
@@ -159,4 +208,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = Today;
+module.exports = PriceView;

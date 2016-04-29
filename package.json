@@ -8,7 +8,7 @@
   "dependencies": {
     "react": "^0.14.8",
     "react-native": "^0.24.1",
-    "react-native-localization": "github:elvischiang/ReactNativeLocalization#fix_android_locale"
+    "react-native-localization": "github:stefalda/ReactNativeLocalization"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
