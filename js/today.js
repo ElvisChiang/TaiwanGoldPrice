@@ -13,6 +13,7 @@ const {SERVER_DATA_TODAY} = require('./def');
 type State = {
   dataSource: ListView.DataSource,
   loaded: boolean,
+  error: string,
   date: string,
 };
 
@@ -32,6 +33,7 @@ class Today extends React.Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       loaded: false,
+      error: '',
       date: '',
     };
     this.fetchData();
@@ -44,15 +46,26 @@ class Today extends React.Component {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData.price),
           loaded: true,
-          date: responseData.date
+          date: responseData.date,
+          error: '',
         });
         console.log('today is ' + this.state.date);
+      })
+      .catch(err => {
+        console.log('fetch error: ' + err.message);
+        this.setState({
+          error: err.message
+        });
       })
       .done();
     }
 
   render() {
-    if (!this.state.loaded) {
+    if (this.state.error) {
+      return this.renderErrorView();
+    }
+
+    if (this.state.loaded === false) {
       return this.renderLoadingView();
     }
 
@@ -73,6 +86,14 @@ class Today extends React.Component {
         <Text>
           Loading gold price...
         </Text>
+      </View>
+    );
+  }
+
+  renderErrorView() {
+    return (
+      <View style={styles.container}>
+        <Text>{this.state.error}</Text>
       </View>
     );
   }
