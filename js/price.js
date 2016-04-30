@@ -99,6 +99,7 @@ class PriceView extends React.Component {
     return (
       <ListView
         dataSource={this.state.dataSource}
+        enableEmptySections={true}
         renderHeader={this.renderHeader.bind(this)}
         renderRow={this.renderPrice.bind(this)}
         style={styles.listview}
@@ -198,8 +199,8 @@ const styles = StyleSheet.create({
   },
   listview: {
     flex: 1,
-    marginBottom: 50,
     paddingTop: 20,
+    paddingBottom: 50,
     backgroundColor: '#F5FCFF'
   },
   separator: {
