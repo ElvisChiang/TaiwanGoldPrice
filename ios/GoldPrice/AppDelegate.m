@@ -11,10 +11,19 @@
 
 #import "RCTRootView.h"
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <asl.h>
+#import "RCTLog.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [Fabric with:@[[Crashlytics class]]];
+  RCTSetLogThreshold(RCTLogLevelInfo);
+  RCTSetLogFunction(CrashlyticsReactLogFunction);
+
   NSURL *jsCodeLocation;
 
   /**
@@ -55,5 +64,45 @@
   [self.window makeKeyAndVisible];
   return YES;
 }
+
+RCTLogFunction CrashlyticsReactLogFunction = ^(
+                                               RCTLogLevel level,
+                                               __unused RCTLogSource source,
+                                               NSString *fileName,
+                                               NSNumber *lineNumber,
+                                               NSString *message
+                                               )
+{
+  NSString *log = RCTFormatLog([NSDate date], level, fileName, lineNumber, message);
+  
+#ifdef DEBUG
+  fprintf(stderr, "%s\n", log.UTF8String);
+  fflush(stderr);
+#else
+  CLS_LOG(@"RCTLOG: %s", log.UTF8String);
+#endif
+  
+  int aslLevel;
+  switch(level) {
+    case RCTLogLevelTrace:
+      aslLevel = ASL_LEVEL_DEBUG;
+      break;
+    case RCTLogLevelInfo:
+      aslLevel = ASL_LEVEL_NOTICE;
+      break;
+    case RCTLogLevelWarning:
+      aslLevel = ASL_LEVEL_WARNING;
+      break;
+    case RCTLogLevelError:
+      aslLevel = ASL_LEVEL_ERR;
+      break;
+    case RCTLogLevelFatal:
+      aslLevel = ASL_LEVEL_CRIT;
+      break;
+  }
+  asl_log(NULL, NULL, aslLevel, "%s", message.UTF8String);
+  
+  
+};
 
 @end

@@ -6,9 +6,10 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react": "^0.14.8",
-    "react-native": "^0.25.1",
-    "react-native-localization": "github:stefalda/ReactNativeLocalization"
+    "react": "^15.0.2",
+    "react-native": "^0.26.1",
+    "react-native-fabric": "^0.2.1",
+    "react-native-localization": "^0.1.14"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",

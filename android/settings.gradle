@@ -1,4 +1,5 @@
 rootProject.name = 'GoldPrice'
 
-include ':ReactNativeLocalization',':app'
+include ':react-native-fabric',':ReactNativeLocalization',':app'
 project(':ReactNativeLocalization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
+project(':react-native-fabric').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fabric/android')
